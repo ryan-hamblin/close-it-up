@@ -46,7 +46,14 @@ callJake(phoneNumber);
   Write a function called makeCounter that makes the following code work properly.
 */
 
-  //Code Here
+var makeCounter = function () {
+  var countIt = 0;
+  return function counting() {
+    countIt = countIt + 1;
+    console.log(countIt);
+  }
+}
+
   var count = makeCounter();
   count() // 1
   count() // 2
@@ -67,5 +74,35 @@ callJake(phoneNumber);
 */
 
 
+var fn = function (innerFunction) {
+  var x = true
+  return function () {
+    if (x) {
+    innerFunction();
+    x = false;
+    }
+  }
+}
 
 
+var innerFunction = fn(function () {alert('Ryan')});
+innerFunction();
+innerFunction();
+
+// next step
+
+
+var fn = function (innerFunction, counter) {
+  var x = counter
+  return function () {
+    if (x) {
+    innerFunction();
+    x = counter--;
+    alert(x);
+    }
+  }
+}
+  
+var innerFunction = fn(function () {alert('Ryan')}, 5);
+innerFunction();
+innerFunction();
